@@ -31,6 +31,7 @@ def main():
     liste_new_annonce = []
     list_old_value_existing_annonce = {}
     list_new_value_existing_annonce = {}
+    list_id_annonces_from_csv_file = []
 
     if len(files) == 0:
         print("No files to treat...")
@@ -53,6 +54,7 @@ def main():
 
             old_price = row[8]
             try:
+                list_id_annonces_from_csv_file.append(id)
                 annonce = Annonce.objects.get(id=id)
                 updated_annonce = annonce
                 updated = False
@@ -149,7 +151,7 @@ def main():
     nb_deleted_annonce = 0
     all_annonces = Annonce.objects.filter(mark_as_deleted=False)
     for a in all_annonces:
-        if str(a.id) not in list_old_value_existing_annonce.keys():
+        if str(a.id) not in list_id_annonces_from_csv_file:
             nb_deleted_annonce += 1
             a.mark_as_deleted = True
             a.save(force_update=True)
