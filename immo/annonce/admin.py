@@ -5,7 +5,7 @@ from .models import Annonce
 
 # Register your models here.
 class AnnonceAdmin(admin.ModelAdmin):
-    list_display = ('id',
+    list_display = ('id_annonce',
                     'update_date_time',
                     'localisation',
                     'price',

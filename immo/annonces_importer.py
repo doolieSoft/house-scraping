@@ -47,18 +47,18 @@ def main():
             surface = row[3]
             description = row[4]
             lien = row[5]
-            id = row[6]
+            id_annonce = row[6]
             django_file = None
             if row[7] != "":
                 django_file = File(open(row[7], 'rb'))
 
             old_price = row[8]
             try:
-                list_id_annonces_from_csv_file.append(id)
-                annonce = Annonce.objects.get(id=id)
+                list_id_annonces_from_csv_file.append(id_annonce)
+                annonce = Annonce.objects.get(id_annonce=id_annonce)
                 updated_annonce = annonce
                 updated = False
-                list_old_value_existing_annonce[id] = copy.deepcopy(annonce)
+                list_old_value_existing_annonce[id_annonce] = copy.deepcopy(annonce)
                 if annonce.lien != lien:
                     updated_annonce.lien = lien
                     # updated = True
@@ -82,7 +82,7 @@ def main():
                     updated = True
 
                 if updated == True:
-                    list_new_value_existing_annonce[id] = updated_annonce
+                    list_new_value_existing_annonce[id_annonce] = updated_annonce
                     if django_file is not None:
                         updated_annonce.image.save("image.jpg", django_file, save=True)
                     else:
@@ -91,7 +91,7 @@ def main():
 
             except Annonce.DoesNotExist:
                 new_annonce = Annonce()
-                new_annonce.id = id
+                new_annonce.id_annonce = id_annonce
                 new_annonce.lien = lien
                 new_annonce.description = description
                 new_annonce.price = price
@@ -110,7 +110,7 @@ def main():
         msg += "Pas de nouvelles annonces...\n"
     else:
         for a in liste_new_annonce:
-            msg += "Id : " + str(a.id) + "\n" \
+            msg += "Id : " + str(a.id_annonce) + "\n" \
                    + str(a.localisation) + "\n" \
                    + str(a.type_house) + " - " + str(a.description) + "\n" \
                    + str(a.surface) + "\n" \
@@ -152,11 +152,11 @@ def main():
     nb_deleted_annonce = 0
     all_annonces = Annonce.objects.filter(mark_as_deleted=False)
     for a in all_annonces:
-        if str(a.id) not in list_id_annonces_from_csv_file:
+        if str(a.id_annonce) not in list_id_annonces_from_csv_file:
             nb_deleted_annonce += 1
             a.mark_as_deleted = True
             a.save(force_update=True)
-            msg += "Id : " + str(a.id) + "\n" \
+            msg += "Id : " + str(a.id_annonce) + "\n" \
                    + str(a.localisation) + "\n" \
                    + str(a.type_house) + " - " + str(a.description) + "\n" \
                    + str(a.surface) + "\n" \
