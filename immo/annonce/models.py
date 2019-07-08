@@ -8,7 +8,7 @@ class Annonce(models.Model):
     price = models.CharField(max_length=20)
     old_price = models.CharField(max_length=20)
     localisation = models.CharField(max_length=50)
-    type = models.CharField(max_length=50)
+    type_house = models.CharField(max_length=50)
     surface = models.CharField(max_length=50)
     description = models.CharField(max_length=300)
     lien = models.URLField()
@@ -16,7 +16,7 @@ class Annonce(models.Model):
     mark_as_deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.type + " | " + self.localisation
+        return self.type_house + " | " + self.localisation
 
     # def image_tag(self):
     #     return mark_safe('<img src="%s" width="130" />' % self.image.url)
