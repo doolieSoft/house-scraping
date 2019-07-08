@@ -1,4 +1,3 @@
-
 *.pyc
 prod.py
 venv/*
