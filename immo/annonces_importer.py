@@ -88,6 +88,9 @@ def main():
                     else:
                         updated_annonce.mark_as_deleted = False
                         updated_annonce.save(force_update=True)
+                else:
+                    updated_annonce.mark_as_deleted = False
+                    updated_annonce.save()
 
             except Annonce.DoesNotExist:
                 new_annonce = Annonce()
