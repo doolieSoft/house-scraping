@@ -42,7 +42,7 @@ def main():
 
         for row in annonce_reader:
             localisation = row[0]
-            type = row[1]
+            type_house = row[1]
             price = row[2]
             surface = row[3]
             description = row[4]
@@ -74,8 +74,8 @@ def main():
                 if annonce.surface != surface:
                     updated_annonce.surface = surface
                     updated = True
-                if annonce.type != type:
-                    updated_annonce.type = type
+                if annonce.type_house != type_house:
+                    updated_annonce.type_house = type_house
                     updated = True
                 if annonce.localisation != localisation:
                     updated_annonce.localisation = localisation
@@ -97,7 +97,7 @@ def main():
                 new_annonce.price = price
                 new_annonce.old_price = old_price
                 new_annonce.surface = surface
-                new_annonce.type = type
+                new_annonce.type_house = type_house
                 new_annonce.localisation = localisation
                 if django_file is not None:
                     new_annonce.image.save("image.jpg", django_file, save=True)
@@ -112,7 +112,7 @@ def main():
         for a in liste_new_annonce:
             msg += "Id : " + str(a.id) + "\n" \
                    + str(a.localisation) + "\n" \
-                   + str(a.type) + " - " + str(a.description) + "\n" \
+                   + str(a.type_house) + " - " + str(a.description) + "\n" \
                    + str(a.surface) + "\n" \
                    + "Prix : " + str(a.price) + " Ancien prix : " + str(a.old_price) + "\n" \
                    + str(a.lien) + "\n\n"
@@ -122,7 +122,7 @@ def main():
     for id_annonce, new_annonce in list_new_value_existing_annonce.items():
         msg += "Id : " + str(id_annonce) + "\n" \
                + str(new_annonce.localisation) + "\n" \
-               + str(new_annonce.type) + " - " + str(new_annonce.description) + "\n" \
+               + str(new_annonce.type_house) + " - " + str(new_annonce.description) + "\n" \
                + str(new_annonce.surface) + "\n" \
                + "Prix : " + str(new_annonce.price) + " Ancien prix : " + str(new_annonce.old_price) + "\n" \
                + str(new_annonce.lien) + "\n\n"
@@ -131,8 +131,8 @@ def main():
         old_annonce = list_old_value_existing_annonce[id_annonce]
         if new_annonce.localisation != old_annonce.localisation:
             msg += "Localisation : {}\n".format(old_annonce.localisation)
-        if new_annonce.type != old_annonce.type:
-            msg += "Type : {}\n".format(old_annonce.type)
+        if new_annonce.type_house != old_annonce.type_house:
+            msg += "Type : {}\n".format(old_annonce.type_house)
         if new_annonce.description != old_annonce.description:
             msg += "Description : {}\n".format(old_annonce.description)
         if new_annonce.surface != old_annonce.surface:
@@ -158,7 +158,7 @@ def main():
             a.save(force_update=True)
             msg += "Id : " + str(a.id) + "\n" \
                    + str(a.localisation) + "\n" \
-                   + str(a.type) + " - " + str(a.description) + "\n" \
+                   + str(a.type_house) + " - " + str(a.description) + "\n" \
                    + str(a.surface) + "\n" \
                    + "Prix : " + str(a.price) + " Ancien prix : " + str(a.old_price) + "\n" \
                    + str(a.lien) + "\n\n"

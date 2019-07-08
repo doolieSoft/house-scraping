@@ -10,7 +10,7 @@ class AnnonceAdmin(admin.ModelAdmin):
                     'localisation',
                     'price',
                     'old_price',
-                    'type',
+                    'type_house',
                     'surface',
                     'description',
                     'lien_tag',
