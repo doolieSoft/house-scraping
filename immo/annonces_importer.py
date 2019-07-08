@@ -143,6 +143,7 @@ def main():
             msg += "Old price : {}\n".format(old_annonce.old_price)
         # if new_annonce.lien != old_annonce.lien:
         #    msg += "Lien : {}\n\n\n".format(old_annonce.lien)
+        msg += "\n\n"
 
     if len(list_new_value_existing_annonce) == 0:
         msg += "\nPas d'annonces mises à jour\n"
