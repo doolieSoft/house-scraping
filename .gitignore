@@ -1,6 +1,11 @@
+<<<<<<< 787934afed7483d311152e5af35604286e36ce21
 __pycache__/*
 immo/screenshot/*
 immo/immo/__pycache__/*
+=======
+*.pyc
+prod.py
+>>>>>>> update gitignore
 immo/annonce/__pycache__/*
 immo/__pycache__/*
 immo/db.dev.sqlite3
