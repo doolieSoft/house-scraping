@@ -81,16 +81,15 @@ def main():
                     updated_annonce.localisation = localisation
                     updated = True
 
-                if updated == True:
-                    list_new_value_existing_annonce[id_annonce] = updated_annonce
-                    if django_file is not None:
-                        updated_annonce.image.save("image.jpg", django_file, save=True)
-                    else:
-                        updated_annonce.mark_as_deleted = False
-                        updated_annonce.save(force_update=True)
+                if django_file is not None:
+                    updated_annonce.image.save("image.jpg", django_file, save=True)
                 else:
                     updated_annonce.mark_as_deleted = False
-                    updated_annonce.save()
+                    if updated == True:
+                        list_new_value_existing_annonce[id_annonce] = updated_annonce
+                        updated_annonce.save(skip_last_update_time=False)
+                    else:
+                        updated_annonce.save(skip_last_update_time=True)
 
             except Annonce.DoesNotExist:
                 new_annonce = Annonce()
