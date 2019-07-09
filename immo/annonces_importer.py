@@ -48,7 +48,7 @@ def main():
             description = row[4]
             lien = row[5]
             id_annonce = row[6]
-            django_file = None
+
             if row[7] != "":
                 django_file = File(open(row[7], 'rb'))
 
@@ -81,15 +81,13 @@ def main():
                     updated_annonce.localisation = localisation
                     updated = True
 
-                if django_file is not None:
-                    updated_annonce.image.save("image.jpg", django_file, save=True)
-                else:
+                if updated == True:
                     updated_annonce.mark_as_deleted = False
-                    if updated == True:
-                        list_new_value_existing_annonce[id_annonce] = updated_annonce
-                        updated_annonce.save(skip_last_update_time=False)
-                    else:
-                        updated_annonce.save(skip_last_update_time=True)
+                    list_new_value_existing_annonce[id_annonce] = updated_annonce
+                    updated_annonce.save(skip_last_update_time=False)
+                elif annonce.mark_as_deleted == True:
+                    updated_annonce.mark_as_deleted = False
+                    updated_annonce.save(skip_last_update_time=False)
 
             except Annonce.DoesNotExist:
                 new_annonce = Annonce()
@@ -101,10 +99,7 @@ def main():
                 new_annonce.surface = surface
                 new_annonce.type_house = type_house
                 new_annonce.localisation = localisation
-                if django_file is not None:
-                    new_annonce.image.save("image.jpg", django_file, save=True)
-                else:
-                    new_annonce.save()
+                new_annonce.save(skip_last_update_time=False)
                 liste_new_annonce.append(new_annonce)
 
     msg = "Hello,\nTu trouveras la liste des nouvelles maisons mises en ligne sur Immoweb\n\n"
