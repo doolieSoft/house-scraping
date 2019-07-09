@@ -169,6 +169,7 @@ def main():
     print("Sending {} new annonce by mail".format(len(liste_new_annonce)))
     print("Sending {} updated annonce by mail".format(len(list_new_value_existing_annonce)))
     print("Sending {} deleted annonce by mail".format(nb_deleted_annonce))
+    #TODO if annonce is marked_as_deleted, and then is present in new annonce.csv --> should send a mail to inform user annonce is now available again
     if len(liste_new_annonce) > 0 or len(list_new_value_existing_annonce) > 0 or nb_deleted_annonce > 0:
         server = smtplib.SMTP(config['smtp'], config['port'])
         server.ehlo()
