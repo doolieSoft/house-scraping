@@ -142,6 +142,7 @@ def main():
             for i in range(len(addresses)):
                 id_house = addresses[i].parent.parent.parent.parent.attrs['id']
                 dict_house[id_house]['address'] = addresses[i].get_text().replace("\t", "").replace("\n", "").strip()
+                logging.debug("Address : {}".format(dict_house[id_house]['address']))
                 id_house = type_houses[i].parent.parent.parent.attrs['id']
                 dict_house[id_house]['type_house'] = type_houses[i].get_text().replace("\t", "").replace("\n",
                                                                                                          "").strip()
