@@ -100,8 +100,8 @@ def main():
                 new_annonce.surface = surface
                 new_annonce.type_house = type_house
                 new_annonce.localisation = localisation
-                new_annonce.save(skip_last_update_time=False)
                 new_annonce.peb = peb
+                new_annonce.save(skip_last_update_time=False)
                 liste_new_annonce.append(new_annonce)
 
     msg = "Hello,\nTu trouveras la liste des nouvelles maisons mises en ligne sur Immoweb\n\n"
