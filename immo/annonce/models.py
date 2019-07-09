@@ -6,8 +6,8 @@ from django.utils.safestring import mark_safe
 # Create your models here.
 class Annonce(models.Model):
     id_annonce = models.BigIntegerField(primary_key=True)
-    price = models.CharField(max_length=20)
-    old_price = models.CharField(max_length=20)
+    price = models.CharField(max_length=20, blank=True, null=True)
+    old_price = models.CharField(max_length=20, blank=True, null=True)
     localisation = models.CharField(max_length=50)
     type_house = models.CharField(max_length=50)
     surface = models.CharField(max_length=50)
