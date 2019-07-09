@@ -49,9 +49,6 @@ def main():
             lien = row[5]
             id_annonce = row[6]
 
-            if row[7] != "":
-                django_file = File(open(row[7], 'rb'))
-
             old_price = row[8]
             peb = row[9]
             try:
