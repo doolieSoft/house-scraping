@@ -142,7 +142,7 @@ def main():
             msg += "Price : {}\n".format(old_annonce.price)
         if new_annonce.old_price != old_annonce.old_price:
             msg += "Old price : {}\n".format(old_annonce.old_price)
-        if new_annonce.old_price != old_annonce.old_price:
+        if new_annonce.peb != old_annonce.peb:
             msg += "PEB : {}\n".format(old_annonce.peb)
         # if new_annonce.lien != old_annonce.lien:
         #    msg += "Lien : {}\n\n\n".format(old_annonce.lien)
