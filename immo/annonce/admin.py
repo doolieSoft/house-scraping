@@ -6,7 +6,7 @@ from .models import Annonce
 # Register your models here.
 class AnnonceAdmin(admin.ModelAdmin):
     list_display = ('id_annonce',
-                    'update_date_time',
+                    'last_update_time',
                     'localisation',
                     'price',
                     'old_price',
@@ -15,7 +15,7 @@ class AnnonceAdmin(admin.ModelAdmin):
                     'description',
                     'lien_tag',
                     'mark_as_deleted')
-    ordering = ('-update_date_time',)
+    ordering = ('-last_update_time',)
 
 
 admin.site.register(Annonce, AnnonceAdmin)
