@@ -103,15 +103,8 @@ def main():
                 new_annonce.surface = surface
                 new_annonce.type_house = type_house
                 new_annonce.localisation = localisation
-<<<<<<< HEAD
                 new_annonce.save(skip_last_update_time=False)
-=======
                 new_annonce.peb = peb
-                if django_file is not None:
-                    new_annonce.image.save("image.jpg", django_file, save=True)
-                else:
-                    new_annonce.save()
->>>>>>> develop
                 liste_new_annonce.append(new_annonce)
 
     msg = "Hello,\nTu trouveras la liste des nouvelles maisons mises en ligne sur Immoweb\n\n"
