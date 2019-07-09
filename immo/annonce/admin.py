@@ -14,6 +14,7 @@ class AnnonceAdmin(admin.ModelAdmin):
                     'surface',
                     'description',
                     'lien_tag',
+                    'peb',
                     'mark_as_deleted')
     ordering = ('-last_update_time',)
 

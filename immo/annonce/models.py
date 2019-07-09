@@ -12,6 +12,7 @@ class Annonce(models.Model):
     type_house = models.CharField(max_length=50)
     surface = models.CharField(max_length=50)
     description = models.CharField(max_length=300)
+    peb = models.CharField(max_length=1, blank=True, null=False, default="")
     lien = models.URLField()
     last_update_time = models.DateTimeField(default=timezone.now)
     mark_as_deleted = models.BooleanField(default=False)

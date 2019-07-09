@@ -5,8 +5,8 @@ import json
 import logging
 import re
 import shutil
-import time
 
+import time
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 from selenium import webdriver
@@ -77,6 +77,14 @@ def main():
             addresses = soup.find_all('span', attrs={'class': 'result-adress'})
             logging.debug("Nb span addresses found : {}".format(len(addresses)))
 
+            pebs = []
+            for gal_img_peb in soup.find_all('div', attrs={'class': 'gal-img-peb'}):
+                if gal_img_peb.find('img') is not None:
+                    peb = re.search(r"peb_(?P<name>.?).*",
+                                    gal_img_peb.find('img').attrs['src']).group('name')
+                    pebs.append(peb)
+                else:
+                    pebs.append("")
             descriptions = soup.find_all('div', attrs={'class': 'xl-desc'})
             descriptions.extend(soup.find_all('div', attrs={'class': 'l-desc'}))
             descriptions.extend(soup.find_all('div', attrs={'class': 'm-desc'}))
@@ -146,7 +154,7 @@ def main():
                 id_house = type_houses[i].parent.parent.parent.attrs['id']
                 dict_house[id_house]['type_house'] = type_houses[i].get_text().replace("\t", "").replace("\n",
                                                                                                          "").strip()
-
+                dict_house[id_house]['peb'] = pebs[i].upper()
                 if prices[i] is not None:
                     if type(prices[i]) is not str:
                         if prices[i].attrs['class'][0] == 'l-price' or prices[i].attrs['class'][0] == 'm-price' or \
@@ -192,7 +200,8 @@ def main():
                 [values['address'], values['type_house'],
                  values['price'], values['surface'],
                  values['description'], values['link'], id_house, values['url_image'],
-                 values['old_price']])
+                 values['old_price'],
+                 values['peb']])
 
     annonce_file_name = annonce_file_name_working.replace('.working', '')
     shutil.move(annonces_root_path + annonce_file_name_working, annonces_root_path + annonce_file_name)
