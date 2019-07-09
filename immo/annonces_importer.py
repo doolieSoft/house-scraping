@@ -157,7 +157,7 @@ def main():
         if str(a.id_annonce) not in list_id_annonces_from_csv_file:
             nb_deleted_annonce += 1
             a.mark_as_deleted = True
-            a.save(force_update=True)
+            a.save(skip_last_update_time=False)
             msg += "Id : " + str(a.id_annonce) + "\n" \
                    + str(a.localisation) + "\n" \
                    + str(a.type_house) + " - " + str(a.description) + "\n" \
