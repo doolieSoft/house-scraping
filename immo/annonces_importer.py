@@ -53,6 +53,7 @@ def main():
                 django_file = File(open(row[7], 'rb'))
 
             old_price = row[8]
+            peb = row[9]
             try:
                 list_id_annonces_from_csv_file.append(id_annonce)
                 annonce = Annonce.objects.get(id_annonce=id_annonce)
@@ -80,6 +81,9 @@ def main():
                 if annonce.localisation != localisation:
                     updated_annonce.localisation = localisation
                     updated = True
+                if annonce.peb != peb:
+                    updated_annonce.peb = peb
+                    updated = True
 
                 if django_file is not None:
                     updated_annonce.image.save("image.jpg", django_file, save=True)
@@ -101,6 +105,7 @@ def main():
                 new_annonce.surface = surface
                 new_annonce.type_house = type_house
                 new_annonce.localisation = localisation
+                new_annonce.peb = peb
                 if django_file is not None:
                     new_annonce.image.save("image.jpg", django_file, save=True)
                 else:
@@ -117,6 +122,7 @@ def main():
                    + str(a.type_house) + " - " + str(a.description) + "\n" \
                    + str(a.surface) + "\n" \
                    + "Prix : " + str(a.price) + " Ancien prix : " + str(a.old_price) + "\n" \
+                   + "PEB : " + str(a.peb) + "\n" \
                    + str(a.lien) + "\n\n"
 
     msg += "\n\nIci, la liste des annonces mises à jour :\n"
@@ -127,6 +133,7 @@ def main():
                + str(new_annonce.type_house) + " - " + str(new_annonce.description) + "\n" \
                + str(new_annonce.surface) + "\n" \
                + "Prix : " + str(new_annonce.price) + " Ancien prix : " + str(new_annonce.old_price) + "\n" \
+               + "PEB : " + str(new_annonce.peb) + "\n" \
                + str(new_annonce.lien) + "\n\n"
 
         msg += "Anciennes valeurs :\n"
@@ -143,6 +150,8 @@ def main():
             msg += "Price : {}\n".format(old_annonce.price)
         if new_annonce.old_price != old_annonce.old_price:
             msg += "Old price : {}\n".format(old_annonce.old_price)
+        if new_annonce.old_price != old_annonce.old_price:
+            msg += "PEB : {}\n".format(old_annonce.peb)
         # if new_annonce.lien != old_annonce.lien:
         #    msg += "Lien : {}\n\n\n".format(old_annonce.lien)
         msg += "\n\n"
@@ -163,6 +172,7 @@ def main():
                    + str(a.type_house) + " - " + str(a.description) + "\n" \
                    + str(a.surface) + "\n" \
                    + "Prix : " + str(a.price) + " Ancien prix : " + str(a.old_price) + "\n" \
+                   + "PEB : " + str(a.peb) + "\n" \
                    + str(a.lien) + "\n\n"
     if nb_deleted_annonce == 0:
         msg += "\nPas d'annonces supprimées\n"
