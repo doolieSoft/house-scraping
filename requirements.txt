@@ -2,7 +2,7 @@ altgraph==0.16.1
 beautifulsoup4==4.7.1
 certifi==2019.6.16
 chardet==3.0.4
-Django==2.2.3
+Django==2.2.28
 EasyProcess==0.2.7
 fake-useragent==0.1.11
 future==0.17.1
